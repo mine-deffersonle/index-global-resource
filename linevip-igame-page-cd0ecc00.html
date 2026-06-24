@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常查询与延伸阅读 · 爱游戏</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1c1c1c;
+            background-color: #f4f2ef;
+        }
+
+        /* 深色头图 —— 故事开场 */
+        .hero {
+            background: linear-gradient(145deg, #17191e 0%, #22262e 100%);
+            color: #eae6e0;
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(220, 200, 180, 0.08);
+        }
+
+        .hero p.lead {
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            max-width: 700px;
+            margin: 0 auto 0.6rem;
+            color: #c4bab0;
+            font-weight: 300;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+            color: #f0ece6;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #b5aca2;
+            border-top: 1px solid rgba(200, 185, 170, 0.15);
+            padding-top: 1.4rem;
+            display: inline-block;
+        }
+
+        /* 浅色正文区 — 像翻开一页笔记 */
+        .content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2.8rem 1.5rem 3.5rem;
+            background: #faf9f7;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.02);
+        }
+
+        .intro-text {
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+            color: #2c2a28;
+        }
+
+        .intro-text p {
+            margin-bottom: 1.4rem;
+        }
+
+        .intro-text p:first-child::first-letter {
+            font-size: 1.8rem;
+            font-weight: 450;
+            color: #7f6b5c;
+            margin-right: 4px;
+        }
+
+        /* 特点卡片 —— 干净、留白多 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem 2rem;
+            margin: 2.8rem 0 3rem;
+        }
+
+        .feature-item {
+            background: #ffffff;
+            padding: 1.6rem 1.4rem 1.4rem;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0,0,0,0.03);
+            border: 1px solid #efebe7;
+            transition: box-shadow 0.2s;
+        }
+
+        .feature-item:hover {
+            box-shadow: 0 6px 20px rgba(80, 70, 60, 0.04);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #3b3530;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2px;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #4f4943;
+            line-height: 1.6;
+        }
+
+        .feature-item .emoji-bullet {
+            display: inline-block;
+            margin-right: 4px;
+            font-size: 1.1rem;
+        }
+
+        /* 场景段落 + 引用式说明 */
+        .scene-section {
+            background: #f5f2ee;
+            padding: 1.8rem 2rem;
+            border-radius: 20px;
+            margin: 2.2rem 0 2.8rem;
+        }
+
+        .scene-section h2 {
+            font-size: 1.2rem;
+            font-weight: 450;
+            color: #4d423b;
+            margin-bottom: 1rem;
+            border-left: 4px solid #b79f8b;
+            padding-left: 1rem;
+        }
+
+        .scene-section p {
+            color: #3d3833;
+            margin-bottom: 1rem;
+        }
+
+        .scene-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scene-section li {
+            padding: 0.5rem 0 0.5rem 1.2rem;
+            position: relative;
+            color: #4f4740;
+        }
+
+        .scene-section li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #b0937c;
+            font-weight: 300;
+        }
+
+        /* 温和结尾 + FAQ 摘要 */
+        .gentle-closing {
+            border-top: 1px solid #e2dbd4;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .closing-note {
+            flex: 2 1 260px;
+        }
+
+        .closing-note p {
+            font-size: 0.98rem;
+            color: #3b3733;
+        }
+
+        .faq-mini {
+            flex: 1 1 200px;
+            background: #f0ece8;
+            padding: 1.2rem 1.4rem;
+            border-radius: 14px;
+        }
+
+        .faq-mini h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4b3f37;
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .faq-mini summary {
+            color: #5b4f46;
+            cursor: pointer;
+            font-weight: 450;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #9a887a;
+        }
+
+        .faq-mini details p {
+            margin-top: 0.4rem;
+            padding-left: 0.6rem;
+            color: #4d4640;
+            border-left: 2px solid #d3c6ba;
+        }
+
+        /* 强调色 —— 用于链接 */
+        a {
+            color: #866b58;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+            font-weight: 450;
+        }
+
+        a:hover {
+            color: #5e4a3b;
+            border-bottom-color: #b79f8b;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.8rem;
+            font-size: 0.85rem;
+            color: #8b8178;
+            border-top: 1px solid #e6dfd8;
+            padding-top: 1.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.1rem; }
+            .feature-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .content { padding: 2rem 1rem 2.8rem; }
+            .scene-section { padding: 1.4rem 1.2rem; }
+            .gentle-closing { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 深色头图：开场短句 -->
+    <section class="hero">
+        <p class="lead">有时只是随手一查，想厘清几个对照项。</p>
+        <h1>翻看、比对、延伸</h1>
+        <div class="sub">在信息碎片里，留一处安静的整理架。</div>
+    </section>
+
+    <!-- 浅色正文区 -->
+    <main class="content">
+        <div class="intro-text">
+            <p>
+                你大概有过这样的经历：打开一个页面，本意只是快速核对一个名词，最后却顺着关联条目读了好一会儿。这种“查询—对照—再延伸”的节奏，其实很自然。我们日常接触的游戏内容、平台说明或版本信息，往往在逐条对比之后，脉络才真正清晰起来。
+            </p>
+            <p>
+                比如当你面对一款产品的不同入口、不同功能介绍，与其零散地收藏截图，不如集中在一个地方对照着看。基于这种习惯，我们整理了下面几个侧面——它们来自对 <a href="https://linevip-igame.com">爱游戏</a> 相关信息的观察与归纳。不追求全面，只希望在你需要快速定位或横向比较时，能提供一点线索。
+            </p>
+        </div>
+
+        <!-- 特点列表：卡片式，平实说明 -->
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3><span class="emoji-bullet">·</span> 模块化结构</h3>
+                <p>不同功能区域相对独立，适合逐一查看、做笔记或截图对照，不会因为页面太长而迷失。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span class="emoji-bullet">·</span> 信息层级分明</h3>
+                <p>标题、正文、辅助说明用字号和间距区分，扫读时能快速定位感兴趣的部分。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span class="emoji-bullet">·</span> 跨条目关联</h3>
+                <p>页面内常见相互引用的说明，方便从一个点跳到另一个点做对比，类似于纸上随手翻页。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span class="emoji-bullet">·</span> 稳定的更新节奏</h3>
+                <p>内容会随版本或活动做调整，不过核心框架保持稳定，适合作为长期参考的起点。</p>
+            </div>
+        </div>
+
+        <!-- 场景段落：从日常查询切入 -->
+        <div class="scene-section">
+            <h2>几个你可能用到的场景</h2>
+            <ul>
+                <li><strong>对照功能说明</strong> —— 同时打开两三个页面，横向比较各自的侧重与差异。</li>
+                <li><strong>延伸阅读</strong> —— 看到一个不熟悉的术语，顺着页面内链接或相关段落多了解一层。</li>
+                <li><strong>整理个人备忘</strong> —— 把页面里你觉得重要的段落摘出来，加上自己的批注。</li>
+                <li><strong>快速验证</strong> —— 想确认某条规则或提示是否仍然有效，直接定位到对应区域。</li>
+            </ul>
+        </div>
+
+        <!-- 温和结尾 + FAQ 摘要 -->
+        <div class="gentle-closing">
+            <div class="closing-note">
+                <p>
+                    一个页面不可能涵盖所有疑问，但可以作为起点。如果你正巧在梳理与 <a href="https://linevip-igame.com">爱游戏</a> 相关的内容，不妨把它当作一个安静的参照系——不需要一次读完，需要时再回来翻看。
+                </p>
+                <p style="margin-top: 0.8rem;">
+                    也希望这些整理过的条目，能在某个查询的片刻帮你节省一点时间。
+                </p>
+            </div>
+            <div class="faq-mini">
+                <h4>常见疑问 · 摘要</h4>
+                <details>
+                    <summary>页面多久更新一次？</summary>
+                    <p>一般随版本或活动调整，没有固定周期。核心框架保持稳定。</p>
+                </details>
+                <details>
+                    <summary>可以复制内容做笔记吗？</summary>
+                    <p>可以。页面内容本身就是为了方便阅读和参考，摘录时注意标注来源即可。</p>
+                </details>
+                <details>
+                    <summary>遇到不清楚的术语怎么办？</summary>
+                    <p>试试在页面内搜索关键词，或顺着相关链接做延伸阅读，通常会找到上下文说明。</p>
+                </details>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            — 整理笔记 · 2025 —
+        </div>
+    </main>
+</body>
+</html>
